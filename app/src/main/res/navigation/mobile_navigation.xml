@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_home">
+
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="com.hyun.caregiver.fragment.HomeFragment"
+        android:label="@string/menu_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_nav_home_to_nav_example"
+            app:popUpTo="@id/nav_home"
+            app:popUpToInclusive="true"
+            app:destination="@id/nav_example" />
+        <action
+            android:id="@+id/action_nav_home_to_nav_checknote"
+            app:popUpTo="@id/nav_home"
+            app:popUpToInclusive="true"
+            app:destination="@id/nav_checknote" />
+        <action
+            android:id="@+id/action_nav_home_to_nav_pastquestion"
+            app:popUpTo="@id/nav_home"
+            app:popUpToInclusive="true"
+            app:destination="@id/nav_pastquestion" />
+        <action
+            android:id="@+id/action_nav_home_to_nav_question"
+            app:popUpTo="@id/nav_home"
+            app:popUpToInclusive="true"
+            app:destination="@id/nav_question" />
+        <action
+            android:id="@+id/action_nav_home_to_nav_wrong"
+            app:popUpTo="@id/nav_home"
+            app:popUpToInclusive="true"
+            app:destination="@id/nav_wrong" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_checknote"
+        android:name="com.hyun.caregiver.fragment.ChecknoteFragment"
+        android:label="@string/menu_checknote"
+        tools:layout="@layout/fragment_checknote" >
+        <action
+            android:id="@+id/action_nav_checknote_to_nav_example"
+            app:popUpTo="@id/nav_checknote"
+            app:popUpToInclusive="false"
+            app:destination="@id/nav_example" />
+        <action
+            android:id="@+id/action_nav_checknote_to_nav_pastquestion"
+            app:popUpTo="@id/nav_checknote"
+            app:popUpToInclusive="false"
+            app:destination="@id/nav_pastquestion" />
+        <action
+            android:id="@+id/action_nav_checknote_to_nav_home"
+            app:popUpTo="@id/nav_checknote"
+            app:popUpToInclusive="false"
+            app:destination="@id/nav_home" />
+        <action
+            android:id="@+id/action_nav_checknote_to_nav_question"
+            app:popUpTo="@id/nav_checknote"
+            app:popUpToInclusive="false"
+            app:destination="@id/nav_question" />
+        <action
+            android:id="@+id/action_nav_checknote_to_nav_wrong"
+            app:popUpTo="@id/nav_checknote"
+            app:popUpToInclusive="false"
+            app:destination="@id/nav_wrong" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_example"
+        android:name="com.hyun.caregiver.fragment.ExampleFragment"
+        android:label="@string/menu_example"
+        tools:layout="@layout/fragment_example" >
+        <action
+            android:id="@+id/action_nav_example_to_nav_pastquestion"
+            app:popUpTo="@id/nav_example"
+            app:popUpToInclusive="false"
+            app:destination="@id/nav_pastquestion" />
+        <action
+            android:id="@+id/action_nav_example_to_nav_checknote"
+            app:popUpTo="@id/nav_example"
+            app:popUpToInclusive="false"
+            app:destination="@id/nav_checknote" />
+        <action
+            android:id="@+id/action_nav_example_to_nav_home"
+            app:popUpTo="@id/nav_example"
+            app:popUpToInclusive="false"
+            app:destination="@id/nav_home" />
+        <action
+            android:id="@+id/action_nav_example_to_nav_question"
+            app:popUpTo="@id/nav_example"
+            app:popUpToInclusive="false"
+            app:destination="@id/nav_question" />
+        <action
+            android:id="@+id/action_nav_example_to_nav_wrong"
+            app:popUpTo="@id/nav_example"
+            app:popUpToInclusive="false"
+            app:destination="@id/nav_wrong" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_pastquestion"
+        android:name="com.hyun.caregiver.fragment.PastQuestionFragment"
+        android:label="@string/menu_pastquestion"
+        tools:layout="@layout/fragment_pastquestion" >
+        <action
+            android:id="@+id/action_nav_pastquestion_to_nav_home"
+            app:popUpTo="@id/nav_pastquestion"
+            app:popUpToInclusive="false"
+            app:destination="@id/nav_home" />
+        <action
+            android:id="@+id/action_nav_pastquestion_to_nav_example"
+            app:popUpTo="@id/nav_pastquestion"
+            app:popUpToInclusive="false"
+            app:destination="@id/nav_example" />
+        <action
+            android:id="@+id/action_nav_pastquestion_to_nav_checknote"
+            app:popUpTo="@id/nav_pastquestion"
+            app:popUpToInclusive="false"
+            app:destination="@id/nav_checknote" />
+        <action
+            android:id="@+id/action_nav_pastquestion_to_nav_question"
+            app:popUpTo="@id/nav_pastquestion"
+            app:popUpToInclusive="false"
+            app:destination="@id/nav_question" />
+        <action
+            android:id="@+id/action_nav_pastquestion_to_nav_wrong"
+            app:popUpTo="@id/nav_pastquestion"
+            app:popUpToInclusive="false"
+            app:destination="@id/nav_wrong" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_question"
+        android:name="com.hyun.caregiver.fragment.QuestionFragment"
+        android:label="@string/menu_question"
+        tools:layout="@layout/fragment_question" >
+        <action
+            android:id="@+id/action_nav_question_to_nav_home"
+            app:popUpTo="@id/nav_question"
+            app:popUpToInclusive="false"
+            app:destination="@id/nav_home" />
+        <action
+            android:id="@+id/action_nav_question_to_nav_example"
+            app:popUpTo="@id/nav_question"
+            app:popUpToInclusive="false"
+            app:destination="@id/nav_example" />
+        <action
+            android:id="@+id/action_nav_question_to_nav_checknote"
+            app:popUpTo="@id/nav_question"
+            app:popUpToInclusive="false"
+            app:destination="@id/nav_checknote" />
+        <action
+            android:id="@+id/action_nav_question_to_nav_pastquestion"
+            app:popUpTo="@id/nav_question"
+            app:popUpToInclusive="false"
+            app:destination="@id/nav_pastquestion" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_wrong"
+        android:name="com.hyun.caregiver.fragment.WrongFragment"
+        android:label="@string/menu_wrong"
+        tools:layout="@layout/fragment_wrong" >
+        <action
+            android:id="@+id/action_nav_wrong_to_nav_home"
+            app:popUpTo="@id/nav_wrong"
+            app:popUpToInclusive="false"
+            app:destination="@id/nav_home" />
+        <action
+            android:id="@+id/action_nav_wrong_to_nav_example"
+            app:popUpTo="@id/nav_wrong"
+            app:popUpToInclusive="false"
+            app:destination="@id/nav_example" />
+        <action
+            android:id="@+id/action_nav_wrong_to_nav_checknote"
+            app:popUpTo="@id/nav_wrong"
+            app:popUpToInclusive="false"
+            app:destination="@id/nav_checknote" />
+        <action
+            android:id="@+id/action_nav_wrong_to_nav_pastquestion"
+            app:popUpTo="@id/nav_wrong"
+            app:popUpToInclusive="false"
+            app:destination="@id/nav_pastquestion" />
+    </fragment>
+</navigation>

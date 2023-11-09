@@ -1,0 +1,127 @@
+<ScrollView  xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+    <androidx.cardview.widget.CardView
+        android:id="@+id/login_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/custom_edittext"
+        android:layout_marginTop="30dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        app:cardCornerRadius="30dp"
+        app:cardElevation="20dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:id="@+id/sign"
+            tools:context=".SignupActivity">
+            <androidx.constraintlayout.utils.widget.ImageFilterView
+                android:id="@+id/back"
+                android:layout_width="wrap_content"
+                android:layout_height="37dp"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/previous"/>
+            <TextView
+                android:id="@+id/main_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:text="@string/signup"
+                android:textColor="@color/black"
+                android:fontFamily="@font/line_bold"
+                android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
+
+            <TextView
+                android:id="@+id/email_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="30dp"
+                android:textColor="@color/black"
+                android:fontFamily="@font/line_bold"
+                android:textSize="20sp"
+                android:text="이메일" />
+
+            <EditText
+                android:id="@+id/input_email"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:hint="이메일을 입력해주세요" />
+
+            <TextView
+                android:id="@+id/password_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="30dp"
+                android:fontFamily="@font/line_bold"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:text="비밀번호" />
+            <EditText
+                android:id="@+id/input_password"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:hint="9~12자 영문,숫자,특수기호"
+                android:inputType="textPassword" />
+
+            <TextView
+                android:id="@+id/confirm_password_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="30dp"
+                android:fontFamily="@font/line_bold"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:text="비밀번호 확인" />
+            <EditText
+                android:id="@+id/input_confirm_password"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:hint="다시한번 입력해주세요"
+                android:inputType="textPassword" />
+            <TextView
+                android:id="@+id/name_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="30dp"
+                android:fontFamily="@font/line_bold"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:text="닉네임" />
+            <EditText
+                android:id="@+id/input_name"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:hint="ex)홍길동"
+                android:privateImeOptions="defaultInputmode=korean"
+                android:inputType="textPersonName" />
+
+            <Button
+                android:layout_width="161dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="70dp"
+                android:backgroundTint="@color/prime_color"
+                android:text="계정 생성"
+                android:id="@+id/btn_signup"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:textSize="20sp" />
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</ScrollView>
