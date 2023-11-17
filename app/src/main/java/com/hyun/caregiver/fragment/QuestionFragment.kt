@@ -45,7 +45,6 @@ class QuestionFragment : Fragment() {
         val root: View = binding.root
 
         var qid = 1
-        var qnum = 1
         var answer = 0
         var comment = ""
         var comment_img = ""
@@ -71,14 +70,14 @@ class QuestionFragment : Fragment() {
                 }
             })
         }
-        questionViewModel.qnum.observe(viewLifecycleOwner) {
-            qnum = it
-            val layout_manager = binding.itemRecycler.layoutManager!!
-            layout_manager.scrollToPosition(qnum - 1)
-        }
+//        questionViewModel.qnum.observe(viewLifecycleOwner) {
+//            qnum = it
+//        }
 
         questionViewModel.quest.observe(viewLifecycleOwner) {
-            textView.text = qnum.toString() + ". " + it.title
+            val layout_manager = binding.itemRecycler.layoutManager!!
+            layout_manager.scrollToPosition(it.number - 1)
+            textView.text = it.number.toString() + ". " + it.title
             if (it.img != "") {
                 Glide.with((activity as MainActivity)).load(it.img).into(imgView)
             } else {

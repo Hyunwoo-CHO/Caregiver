@@ -4,6 +4,13 @@ import androidx.room.*
 
 @Dao
 interface MyDao {
+    /**             User                    **/
+    @Insert(entity = User::class)
+    fun insertUser(user: User)
+
+    @Query("SELECT * FROM users WHERE id = :id")
+    fun getUser(id: String): User
+
     /**             Question                **/
     @Query("SELECT * FROM questions")
     fun getAllQuestion(): List<Question>

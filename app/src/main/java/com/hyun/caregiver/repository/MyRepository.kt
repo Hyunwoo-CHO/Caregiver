@@ -9,6 +9,20 @@ import kotlinx.coroutines.*
 class MyRepository(database: AppDatabase) {
     private val myDao = database.myDao()
 
+    suspend fun insertUser(id: String) {
+        withContext(Dispatchers.IO) {
+            myDao.insertUser(User(0, id, false))
+        }
+    }
+
+    suspend fun checkUser(id: String) : User {
+        val result: User
+        withContext(Dispatchers.IO) {
+            result = myDao.getUser(id)
+        }
+        return result
+    }
+
     suspend fun fetchDataFromNetwork() {
         //to get new questions in background thread by asynchronous way (call.enqueue)
         val uid = myDao.getLastQuestion() + 2
@@ -20,7 +34,7 @@ class MyRepository(database: AppDatabase) {
                 if (response.isSuccessful) {
                     val data = response.body()!!.get("values").asJsonArray
                     Log.d("data", data.toString())
-                    insertQuestion(data)
+                    insertQuestion(data, uid - 2)
                 }
             }catch (e: Exception) {
                 Log.d("Try-catch repository", e.toString())
@@ -28,13 +42,14 @@ class MyRepository(database: AppDatabase) {
         }
     }
 
-    suspend fun insertQuestion(json : JsonArray) {
+    suspend fun insertQuestion(json : JsonArray, uid: Int) {
         withContext(Dispatchers.IO) {
+            var iter = uid
             for (data in json) {
-//                            Log.d("data", data.toList.toString())
                 val dataList = data.asJsonArray
                 val question = Question(
-                    uid = dataList.get(0).asInt,
+                    uid = iter,
+                    number = dataList.get(0).asInt,
                     title = dataList.get(1).toString().substring(1, dataList.get(1).toString().length - 1),
                     img = dataList.get(2).toString().substring(1, dataList.get(2).toString().length - 1),
                     opt_a = dataList.get(3).toString().substring(1, dataList.get(3).toString().length - 1),
@@ -49,6 +64,7 @@ class MyRepository(database: AppDatabase) {
                     classify = dataList.get(12).toString().substring(1, dataList.get(12).toString().length - 1),
                     solved = false)
                 myDao.insertQuestion(question)
+                iter += 1
             }
         }
     }

@@ -6,6 +6,7 @@ import androidx.lifecycle.*
 import com.hyun.caregiver.database.AppDatabase
 import com.hyun.caregiver.database.Personal
 import com.hyun.caregiver.database.Question
+import com.hyun.caregiver.database.User
 import com.hyun.caregiver.repository.MyRepository
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
@@ -41,6 +42,27 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     val coroutineExceptionHandler = CoroutineExceptionHandler{_, throwable ->
         throwable.printStackTrace()
     }
+    fun insertUser(id: String) {
+        viewModelScope.launch {
+            try {
+                myRepo.insertUser(id)
+            } catch (e: Exception) {
+                Log.d("Try-Catch insertUser", e.toString())
+            }
+        }
+    }
+
+    fun checkUser(id: String) {
+        var result: User
+        viewModelScope.launch {
+            try {
+                result = myRepo.checkUser(id)
+            } catch (e: Exception) {
+                Log.d("Try-Catch checkUser", e.toString())
+            }
+        }
+    }
+
     // use in main activity
     fun getJsonFile() {
         viewModelScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
@@ -84,7 +106,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
                 index = questlist.value!!.indexOfFirst {
                     !it.solved
                 }
-                _indexlist.value = (1..questlist.value!!.size).toList()
+                _indexlist.value = questlist.value!!.map { it.number }
                 _qnum.value = index + 1
                 _quest.value = questlist.value!![index]
             } catch (e: Exception) {
@@ -98,7 +120,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             try {
                 _questlist.value = myRepo.checknoteQuestion(category) //result -> List<Question> question list
                 index = 0
-                _indexlist.value = (1..questlist.value!!.size).toList()
+                _indexlist.value = questlist.value!!.map { it.number }
                 _qnum.value = index + 1
                 _quest.value = questlist.value!![index]
             } catch (e: Exception) {
@@ -107,12 +129,12 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
-    fun indexQuestion(r_index: Int) {
+    fun indexQuestion(number: Int) {
         viewModelScope.launch {
             try {
-                _qnum.value = r_index
-                _quest.value = questlist.value!![r_index - 1]
-                index = r_index - 1
+                val r_index = indexlist.value!!.indexOf(number)
+                _quest.value = questlist.value!![r_index]
+                index = r_index
             } catch (e: Exception) {
                 Log.d("Try-Catch indexQuestion", e.toString())
             }

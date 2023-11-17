@@ -10,12 +10,15 @@ import androidx.constraintlayout.utils.widget.ImageFilterView
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.hyun.caregiver.adapter.ListviewAdapter
 import com.hyun.caregiver.MainActivity
 import com.hyun.caregiver.MainViewModel
 import com.hyun.caregiver.MainViewModelFactory
 import com.hyun.caregiver.R
+import com.hyun.caregiver.adapter.RecyclerAdapter
 import com.hyun.caregiver.databinding.FragmentWrongBinding
 
 class WrongFragment : Fragment() {
@@ -26,6 +29,7 @@ class WrongFragment : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
     private lateinit var dataAdapter: ListviewAdapter
+    private lateinit var listAdapter: RecyclerAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -49,11 +53,30 @@ class WrongFragment : Fragment() {
         val imgView: ImageView = binding.img
         val cmtImgView: ImageFilterView = binding.commentImg
         var qnum = ""
-        wrongViewModel.qnum.observe(viewLifecycleOwner) {
-            qnum = it.toString()
+//        wrongViewModel.qnum.observe(viewLifecycleOwner) {
+//            qnum = it.toString()
+//        }
+
+        wrongViewModel.indexlist.observe(viewLifecycleOwner) {
+            listAdapter = RecyclerAdapter(it)
+            binding.itemRecycler.adapter = listAdapter
+            binding.itemRecycler.layoutManager = LinearLayoutManager((activity as MainActivity), RecyclerView.HORIZONTAL, false)
+            listAdapter.setItemClickListener(object : RecyclerAdapter.onItemClickListener{
+                override fun onItemClick(view: View, position: Int) {
+                    val result = listAdapter.data[position]
+                    pressed = !pressed
+                    binding.comment.text = ""
+                    binding.commentImg.setImageResource(0)
+                    binding.commentBtn.text = "해설 보기"
+                    wrongViewModel.indexQuestion(result)
+                }
+            })
         }
+
         wrongViewModel.quest.observe(viewLifecycleOwner) {
-            textView.text = qnum + ". " + it.title
+            val layout_manager = binding.itemRecycler.layoutManager!!
+            layout_manager.scrollToPosition(it.number - 1)
+            textView.text = it.number.toString() + ". " + it.title
             if (it.img != "") {
                 Glide.with((activity as MainActivity)).load(it.img).into(imgView)
             } else {

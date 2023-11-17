@@ -1,3 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- naver api information !-->
+    <string name="social_login_info_naver_client_id">KX61JLyUmzyIiil9vmFN</string>
+    <string name="social_login_info_naver_client_secret">AFp_Zie3XU</string>
+    <string name="social_login_info_naver_client_name">네이버아이디 로그인</string>
+
+    <!-- kakao api information !-->
+    <string name="kakao_app_key">b44182563edddd41a6db05cedb12d211</string>
+
+    <!-- google sheets base url !-->
+    <string name="google_sheets_url">https://sheets.googleapis.com/v4/spreadsheets/1RRNOQLNsA6ek-1mQcTFsujISH-ajAyf7gueL6GiUKmQ/</string>
 </resources>

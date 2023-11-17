@@ -8,6 +8,7 @@ import androidx.room.PrimaryKey
 data class Question
     (
     @PrimaryKey(autoGenerate = true) val uid : Int?,
+    @ColumnInfo(name = "number") var number : Int,
     @ColumnInfo(name = "title") var title : String,
     @ColumnInfo(name = "img", defaultValue = "") var img : String,
     @ColumnInfo(name = "opt_a") var opt_a : String,
