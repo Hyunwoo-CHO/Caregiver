@@ -17,11 +17,11 @@ class ListviewAdapter (val context: Context, val data_list: ArrayList<String>) :
         val view: View = LayoutInflater.from(context).inflate(R.layout.data_listview, null)
 
         val dataName = view.findViewById<TextView>(R.id.data_name)
-        val img = view.findViewById<ImageFilterView>(R.id.symbol)
+        //val img = view.findViewById<ImageFilterView>(R.id.symbol)
 
         val data = data_list[position]
         dataName.text = data
-        img.alpha = 0f
+        //img.alpha = 0f
 
         return view
     }

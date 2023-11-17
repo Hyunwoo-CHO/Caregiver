@@ -70,9 +70,6 @@ class QuestionFragment : Fragment() {
                 }
             })
         }
-//        questionViewModel.qnum.observe(viewLifecycleOwner) {
-//            qnum = it
-//        }
 
         questionViewModel.quest.observe(viewLifecycleOwner) {
             val layout_manager = binding.itemRecycler.layoutManager!!
@@ -100,18 +97,18 @@ class QuestionFragment : Fragment() {
         // for remember the answer
         questionViewModel.personal.observe(viewLifecycleOwner) {
             val selected = binding.questionMenu.getChildAt(it.m_answer - 1)
-            val image = binding.questionMenu.getChildAt(it.m_answer - 1).findViewById<ImageFilterView>(R.id.symbol)
+            //val image = binding.questionMenu.getChildAt(it.m_answer - 1).findViewById<ImageFilterView>(R.id.symbol)
             if (it.correction) {
                 selected.setBackgroundResource(R.drawable.listview_clicked)
-                image.alpha = 1.0f
+                //image.alpha = 1.0f
             } else {
                 val answer_item = binding.questionMenu.getChildAt(answer - 1)
-                val answer_image = binding.questionMenu.getChildAt(answer - 1).findViewById<ImageFilterView>(R.id.symbol)
+                //val answer_image = binding.questionMenu.getChildAt(answer - 1).findViewById<ImageFilterView>(R.id.symbol)
                 selected.setBackgroundResource(R.drawable.listview_wrong)
-                image.setImageResource(R.drawable.red_check)
-                image.alpha = 1.0f
+                //image.setImageResource(R.drawable.red_check)
+                //image.alpha = 1.0f
                 answer_item.setBackgroundResource(R.drawable.listview_clicked)
-                answer_image.alpha = 1.0f
+                //answer_image.alpha = 1.0f
             }
         }
 
@@ -120,13 +117,13 @@ class QuestionFragment : Fragment() {
             for (i in 0..4) {
                 val initList = binding.questionMenu.getChildAt(i)
                 initList.setBackgroundResource(R.drawable.listview_unclicked)
-                initList.findViewById<ImageFilterView>(R.id.symbol).alpha = 0.0f
+                //initList.findViewById<ImageFilterView>(R.id.symbol).alpha = 0.0f
             }
             if (answer == position + 1) {
                 questionViewModel.insertAnswer(qid, answer, position + 1, true)
                 val selected = binding.questionMenu.getChildAt(position)
                 selected.setBackgroundResource(R.drawable.listview_clicked)
-                selected.findViewById<ImageFilterView>(R.id.symbol).alpha = 1.0f
+                //selected.findViewById<ImageFilterView>(R.id.symbol).alpha = 1.0f
                 // add listview color update and comment
             }
             else {
@@ -134,13 +131,13 @@ class QuestionFragment : Fragment() {
                 // add listview color update and comment
                 val selected = binding.questionMenu.getChildAt(position)
                 val answer_item = binding.questionMenu.getChildAt(answer - 1)
-                val image = selected.findViewById<ImageFilterView>(R.id.symbol)
-                val answer_image = answer_item.findViewById<ImageFilterView>(R.id.symbol)
+                //val image = selected.findViewById<ImageFilterView>(R.id.symbol)
+                //val answer_image = answer_item.findViewById<ImageFilterView>(R.id.symbol)
                 selected.setBackgroundResource(R.drawable.listview_wrong)
-                image.setImageResource(R.drawable.red_check)
-                image.alpha = 1.0f
+                //image.setImageResource(R.drawable.red_check)
+                //image.alpha = 1.0f
                 answer_item.setBackgroundResource(R.drawable.listview_clicked)
-                answer_image.alpha = 1.0f
+                //answer_image.alpha = 1.0f
             }
         }
 

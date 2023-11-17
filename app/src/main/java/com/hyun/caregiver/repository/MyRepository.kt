@@ -103,7 +103,7 @@ class MyRepository(database: AppDatabase) {
 
     suspend fun getAnswer(qid: Int): Personal {
         val result: Personal
-        withContext(Dispatchers.Default) {
+        withContext(Dispatchers.IO) {
             result = myDao.getAnswer(qid)
         }
         return result
