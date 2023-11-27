@@ -82,5 +82,6 @@ dependencies {
     implementation("com.navercorp.nid:oauth-jdk8:5.1.0")
     /**  firebase login  **/
     implementation("com.google.firebase:firebase-auth-ktx")
+    implementation("com.google.firebase:firebase-database-ktx")
     implementation(platform("com.google.firebase:firebase-bom:32.3.1"))
 }

@@ -2,19 +2,24 @@ package com.hyun.caregiver
 
 import android.content.Intent
 import android.os.Bundle
+import android.provider.ContactsContract.CommonDataKinds.Nickname
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.ui.AppBarConfiguration
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import com.hyun.caregiver.database.User
 import com.hyun.caregiver.databinding.ActivitySignupBinding
+import com.hyun.caregiver.repository.MyRepository
 
 class SignupActivity : AppCompatActivity() {
-    private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding : ActivitySignupBinding
     private lateinit var auth: FirebaseAuth
+    private val db = Firebase.database
+    private val myRef = db.getReference("Caregiver")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,7 +36,7 @@ class SignupActivity : AppCompatActivity() {
         binding.btnSignup.setOnClickListener {
             if (binding.inputEmail.text != null && binding.inputPassword.text != null) {
                 if (binding.inputPassword.text.toString().equals(binding.inputConfirmPassword.text.toString())) {
-                    createAccount(binding.inputEmail.text.toString(), binding.inputPassword.text.toString())
+                    createAccount(binding.inputEmail.text.toString(), binding.inputPassword.text.toString(), binding.inputName.text.toString())
                     val intent = Intent(this, LoginActivity::class.java)
                     //intent.putExtra("name", binding.inputName.text.toString())
                     startActivity(intent)
@@ -53,7 +58,7 @@ class SignupActivity : AppCompatActivity() {
         }
     }
 
-    private fun createAccount(email: String, password: String) {
+    private fun createAccount(email: String, password: String, nickname: String) {
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
@@ -63,6 +68,8 @@ class SignupActivity : AppCompatActivity() {
                         "가입 성공",
                         Toast.LENGTH_SHORT,
                     ).show()
+                    val uid = task.getResult().user!!.uid
+                    myRef.child("user").child(uid).setValue(User(uid, email, nickname, "", false))
                     finish()
                 } else {
                     // If sign in fails, display a message to the user.
@@ -71,7 +78,6 @@ class SignupActivity : AppCompatActivity() {
                         "가입 실패",
                         Toast.LENGTH_SHORT,
                     ).show()
-                    finish()
                 }
             }
     }

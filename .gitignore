@@ -17,3 +17,4 @@ AndroidManifest.xml
 API_Information.xml
 RetrofitClient.kt
 google-services.json
+MyRepository.kt

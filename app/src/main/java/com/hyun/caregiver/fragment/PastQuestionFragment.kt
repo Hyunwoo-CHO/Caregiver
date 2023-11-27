@@ -45,8 +45,9 @@ class PastQuestionFragment: Fragment() {
         }
 
         binding.categoryListview.setOnItemClickListener { dataAdapter, view, position, id->
-            pastquestionViewModel.categoryQuestion(dataAdapter.getItemAtPosition(position).toString()) // store the category uid list in viewmodel
-            (activity as MainActivity).findNavController(R.id.nav_host_fragment_content_main).navigate(R.id.action_nav_pastquestion_to_nav_question)
+            pastquestionViewModel.testQuestion(dataAdapter.getItemAtPosition(position).toString()) // store the category uid list in viewmodel
+            //Dialog for checking test start (Not full screen)
+            (activity as MainActivity).findNavController(R.id.nav_host_fragment_content_main).navigate(R.id.action_nav_pastquestion_to_nav_test)
         }
 
         return root

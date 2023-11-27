@@ -29,13 +29,13 @@
             android:layout_weight="0.9"
             android:gravity="center_vertical"/>
 
-<!--        <androidx.constraintlayout.utils.widget.ImageFilterView-->
-<!--            android:id="@+id/symbol"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_gravity="center_vertical"-->
-<!--            android:layout_weight="0.1"-->
-<!--            android:alpha="0"-->
-<!--            android:src="@drawable/blue_check" />-->
+        <androidx.constraintlayout.utils.widget.ImageFilterView
+            android:id="@+id/symbol"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="0.1"
+            android:alpha="0"
+            android:src="@drawable/blue_check" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

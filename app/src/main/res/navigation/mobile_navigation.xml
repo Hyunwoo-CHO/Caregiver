@@ -25,16 +25,6 @@
             app:popUpTo="@id/nav_home"
             app:popUpToInclusive="true"
             app:destination="@id/nav_pastquestion" />
-        <action
-            android:id="@+id/action_nav_home_to_nav_question"
-            app:popUpTo="@id/nav_home"
-            app:popUpToInclusive="true"
-            app:destination="@id/nav_question" />
-        <action
-            android:id="@+id/action_nav_home_to_nav_wrong"
-            app:popUpTo="@id/nav_home"
-            app:popUpToInclusive="true"
-            app:destination="@id/nav_wrong" />
     </fragment>
 
     <fragment
@@ -57,11 +47,6 @@
             app:popUpTo="@id/nav_checknote"
             app:popUpToInclusive="false"
             app:destination="@id/nav_home" />
-        <action
-            android:id="@+id/action_nav_checknote_to_nav_question"
-            app:popUpTo="@id/nav_checknote"
-            app:popUpToInclusive="false"
-            app:destination="@id/nav_question" />
         <action
             android:id="@+id/action_nav_checknote_to_nav_wrong"
             app:popUpTo="@id/nav_checknote"
@@ -94,11 +79,6 @@
             app:popUpTo="@id/nav_example"
             app:popUpToInclusive="false"
             app:destination="@id/nav_question" />
-        <action
-            android:id="@+id/action_nav_example_to_nav_wrong"
-            app:popUpTo="@id/nav_example"
-            app:popUpToInclusive="false"
-            app:destination="@id/nav_wrong" />
     </fragment>
 
     <fragment
@@ -122,15 +102,10 @@
             app:popUpToInclusive="false"
             app:destination="@id/nav_checknote" />
         <action
-            android:id="@+id/action_nav_pastquestion_to_nav_question"
+            android:id="@+id/action_nav_pastquestion_to_nav_test"
             app:popUpTo="@id/nav_pastquestion"
             app:popUpToInclusive="false"
-            app:destination="@id/nav_question" />
-        <action
-            android:id="@+id/action_nav_pastquestion_to_nav_wrong"
-            app:popUpTo="@id/nav_pastquestion"
-            app:popUpToInclusive="false"
-            app:destination="@id/nav_wrong" />
+            app:destination="@id/nav_test" />
     </fragment>
 
     <fragment
@@ -182,6 +157,33 @@
             app:destination="@id/nav_checknote" />
         <action
             android:id="@+id/action_nav_wrong_to_nav_pastquestion"
+            app:popUpTo="@id/nav_wrong"
+            app:popUpToInclusive="false"
+            app:destination="@id/nav_pastquestion" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_test"
+        android:name="com.hyun.caregiver.fragment.TestFragment"
+        android:label="@string/menu_test"
+        tools:layout="@layout/fragment_test" >
+        <action
+            android:id="@+id/action_nav_test_to_nav_home"
+            app:popUpTo="@id/nav_test"
+            app:popUpToInclusive="false"
+            app:destination="@id/nav_home" />
+        <action
+            android:id="@+id/action_nav_test_to_nav_example"
+            app:popUpTo="@id/nav_test"
+            app:popUpToInclusive="false"
+            app:destination="@id/nav_example" />
+        <action
+            android:id="@+id/action_nav_test_to_nav_checknote"
+            app:popUpTo="@id/nav_wrong"
+            app:popUpToInclusive="false"
+            app:destination="@id/nav_checknote" />
+        <action
+            android:id="@+id/action_nav_test_to_nav_pastquestion"
             app:popUpTo="@id/nav_wrong"
             app:popUpToInclusive="false"
             app:destination="@id/nav_pastquestion" />

@@ -1,6 +1,8 @@
 package com.hyun.caregiver.repository
 
 import android.util.Log
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 import com.hyun.caregiver.database.*
 import com.hyun.caregiver.retrofit.RetrofitClient
 import com.google.gson.JsonArray
@@ -8,10 +10,22 @@ import kotlinx.coroutines.*
 
 class MyRepository(database: AppDatabase) {
     private val myDao = database.myDao()
+    private val db = Firebase.database
+    private val myRef = db.getReference("Caregiver")
+    private var uid = ""
 
-    suspend fun insertUser(id: String) {
+    fun storeUID(uid: String) {
+        this.uid = uid
+    }
+
+    //store the personal data in Firebase realtime database
+    private fun writePersonal(data: Personal) {
+        myRef.child("user").child("personal").setValue(data)
+    }
+
+    suspend fun insertUser(uid: String, nickname: String, email: String, profile: String) {
         withContext(Dispatchers.IO) {
-            myDao.insertUser(User(0, id, false))
+            myDao.insertUser(User(uid, nickname, email, profile, false))
         }
     }
 
@@ -34,7 +48,7 @@ class MyRepository(database: AppDatabase) {
                 if (response.isSuccessful) {
                     val data = response.body()!!.get("values").asJsonArray
                     Log.d("data", data.toString())
-                    insertQuestion(data, uid - 2)
+                    insertQuestion(data, uid - 1)
                 }
             }catch (e: Exception) {
                 Log.d("Try-catch repository", e.toString())
@@ -101,6 +115,22 @@ class MyRepository(database: AppDatabase) {
         return result
     }
 
+    suspend fun getTestAnswer(category: String): List<Int> {
+        val result: List<Int>
+        withContext(Dispatchers.IO){
+            result = myDao.getTestAnswer(category)
+        }
+        return result
+    }
+
+    suspend fun getTestQid(category: String): List<Int> {
+        val result: List<Int>
+        withContext(Dispatchers.IO){
+            result = myDao.getTestQid(category)
+        }
+        return result
+    }
+
     suspend fun getAnswer(qid: Int): Personal {
         val result: Personal
         withContext(Dispatchers.IO) {
@@ -112,6 +142,7 @@ class MyRepository(database: AppDatabase) {
     suspend fun insertAnswer(qid: Int, answer: Int, m_answer: Int, correction: Boolean) {
         withContext(Dispatchers.IO) {
             myDao.insertAnswer(Personal(qid, answer, m_answer, correction))
+            writePersonal(Personal(qid, answer, m_answer, correction))
             myDao.updateQuestion(qid)
         }
     }

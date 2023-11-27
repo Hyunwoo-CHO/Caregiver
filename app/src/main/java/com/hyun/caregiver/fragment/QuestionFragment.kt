@@ -76,9 +76,11 @@ class QuestionFragment : Fragment() {
             layout_manager.scrollToPosition(it.number - 1)
             textView.text = it.number.toString() + ". " + it.title
             if (it.img != "") {
-                Glide.with((activity as MainActivity)).load(it.img).into(imgView)
+                Glide.with((activity as MainActivity)).load(it.img).override(1000,500).into(imgView)
+//                imgView.layoutParams.height = 500
             } else {
                 imgView.setImageResource(0)
+                imgView.layoutParams.height = 0
             }
             qid = it.uid!!
             answer = it.answer
@@ -94,50 +96,50 @@ class QuestionFragment : Fragment() {
             }
         }
 
-        // for remember the answer
-        questionViewModel.personal.observe(viewLifecycleOwner) {
-            val selected = binding.questionMenu.getChildAt(it.m_answer - 1)
-            //val image = binding.questionMenu.getChildAt(it.m_answer - 1).findViewById<ImageFilterView>(R.id.symbol)
-            if (it.correction) {
-                selected.setBackgroundResource(R.drawable.listview_clicked)
-                //image.alpha = 1.0f
-            } else {
-                val answer_item = binding.questionMenu.getChildAt(answer - 1)
-                //val answer_image = binding.questionMenu.getChildAt(answer - 1).findViewById<ImageFilterView>(R.id.symbol)
-                selected.setBackgroundResource(R.drawable.listview_wrong)
-                //image.setImageResource(R.drawable.red_check)
-                //image.alpha = 1.0f
-                answer_item.setBackgroundResource(R.drawable.listview_clicked)
-                //answer_image.alpha = 1.0f
-            }
-        }
-
         //check the answer by touching event of listview adapter
         binding.questionMenu.setOnItemClickListener { dataAdapter, view, position, id ->
             for (i in 0..4) {
                 val initList = binding.questionMenu.getChildAt(i)
                 initList.setBackgroundResource(R.drawable.listview_unclicked)
-                //initList.findViewById<ImageFilterView>(R.id.symbol).alpha = 0.0f
+                initList.findViewById<ImageFilterView>(R.id.symbol).alpha = 0.0f
             }
             if (answer == position + 1) {
                 questionViewModel.insertAnswer(qid, answer, position + 1, true)
                 val selected = binding.questionMenu.getChildAt(position)
                 selected.setBackgroundResource(R.drawable.listview_clicked)
-                //selected.findViewById<ImageFilterView>(R.id.symbol).alpha = 1.0f
-                // add listview color update and comment
+                selected.findViewById<ImageFilterView>(R.id.symbol).alpha = 1.0f
+//                 add listview color update and comment
             }
             else {
                 questionViewModel.insertAnswer(qid, answer, position + 1, false)
                 // add listview color update and comment
                 val selected = binding.questionMenu.getChildAt(position)
                 val answer_item = binding.questionMenu.getChildAt(answer - 1)
-                //val image = selected.findViewById<ImageFilterView>(R.id.symbol)
-                //val answer_image = answer_item.findViewById<ImageFilterView>(R.id.symbol)
+                val image = selected.findViewById<ImageFilterView>(R.id.symbol)
+                val answer_image = answer_item.findViewById<ImageFilterView>(R.id.symbol)
                 selected.setBackgroundResource(R.drawable.listview_wrong)
-                //image.setImageResource(R.drawable.red_check)
-                //image.alpha = 1.0f
+                image.setImageResource(R.drawable.red_check)
+                image.alpha = 1.0f
                 answer_item.setBackgroundResource(R.drawable.listview_clicked)
-                //answer_image.alpha = 1.0f
+                answer_image.alpha = 1.0f
+            }
+        }
+
+        // for remember the answer
+        questionViewModel.personal.observe(viewLifecycleOwner) {
+            val selected = binding.questionMenu.getChildAt(it.m_answer - 1)
+            val image = selected.findViewById<ImageFilterView>(R.id.symbol)
+            if (it.correction) {
+                selected.setBackgroundResource(R.drawable.listview_clicked)
+                image.alpha = 1.0f
+            } else {
+                val answer_item = binding.questionMenu.getChildAt(answer - 1)
+                val answer_image = answer_item.findViewById<ImageFilterView>(R.id.symbol)
+                selected.setBackgroundResource(R.drawable.listview_wrong)
+                image.setImageResource(R.drawable.red_check)
+                image.alpha = 1.0f
+                answer_item.setBackgroundResource(R.drawable.listview_clicked)
+                answer_image.alpha = 1.0f
             }
         }
 

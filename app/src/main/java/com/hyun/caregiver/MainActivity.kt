@@ -6,8 +6,10 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import com.google.android.material.navigation.NavigationView
 import androidx.navigation.findNavController
 import androidx.drawerlayout.widget.DrawerLayout
@@ -21,6 +23,11 @@ import com.hyun.caregiver.databinding.ActivityMainBinding
 import com.kakao.sdk.auth.AuthApiClient
 import com.kakao.sdk.user.UserApiClient
 import com.navercorp.nid.NaverIdLoginSDK
+import com.navercorp.nid.oauth.NidOAuthLogin
+import com.navercorp.nid.profile.NidProfileCallback
+import com.navercorp.nid.profile.data.NidProfileResponse
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 class MainActivity : AppCompatActivity() {
 
@@ -55,28 +62,7 @@ class MainActivity : AppCompatActivity() {
         navView.setupWithNavController(navController)
 
         val header = navView.getHeaderView(0)
-        if (auth.currentUser != null) {
-            val user = auth.currentUser
-            email = user?.email.toString()
-        } else if (AuthApiClient.instance.hasToken()) {
-            UserApiClient.instance.me { user, error ->
-                if (error != null) {
-                    Log.e(TAG, "사용자 정보 요청 실패", error)
-                }
-                else if (user != null) {
-                    profile = user.kakaoAccount?.profile?.thumbnailImageUrl!!
-                    nickname = user.kakaoAccount?.profile?.nickname!!
-                    email = user.kakaoAccount?.email!!
-                }
-            }
-        }
-
-        val imageview = header.findViewById<ImageView>(R.id.user_profile)
-        if (profile != "") {
-            Glide.with(this).load(profile).into(imageview)
-        }
-        header.findViewById<TextView>(R.id.user_nickname).text = nickname
-        header.findViewById<TextView>(R.id.user_email).text = email
+        initProfile(header)
 
         mainviewmodel.getJsonFile() // fetch new data from server by viewmodel
     }
@@ -118,5 +104,55 @@ class MainActivity : AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment_content_main)
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
+    }
+
+    fun initProfile(header: View) {
+        val imageview = header.findViewById<ImageView>(R.id.user_profile)
+        val nickview = header.findViewById<TextView>(R.id.user_nickname)
+        val emailview = header.findViewById<TextView>(R.id.user_email)
+
+        if (auth.currentUser != null) {
+            val user = auth.currentUser
+            email = user?.email.toString()
+            if (profile != "") {
+                Glide.with(this@MainActivity).load(profile).into(imageview)
+            }
+            nickview.text = nickname
+            emailview.text = email
+        } else if (AuthApiClient.instance.hasToken()) {
+            UserApiClient.instance.me { user, error ->
+                if (error != null) {
+                    Log.e(TAG, "사용자 정보 요청 실패", error)
+                }
+                else if (user != null) {
+                    profile = user.kakaoAccount?.profile?.thumbnailImageUrl!!
+                    nickname = user.kakaoAccount?.profile?.nickname!!
+                    email = user.kakaoAccount?.email!!
+                    if (profile != "") {
+                        Glide.with(this@MainActivity).load(profile).into(imageview)
+                    }
+                    nickview.text = nickname
+                    emailview.text = email
+                }
+            }
+        } else if (NaverIdLoginSDK.getAccessToken() != null) {
+            NidOAuthLogin().callProfileApi(object : NidProfileCallback<NidProfileResponse> {
+                override fun onSuccess(result: NidProfileResponse) {
+                    profile = result.profile?.profileImage.toString()
+                    nickname = result.profile?.nickname.toString()
+                    email = result.profile?.email.toString()
+                    if (profile != "") {
+                        Glide.with(this@MainActivity).load(profile).into(imageview)
+                    }
+                    nickview.text = nickname
+                    emailview.text = email
+                }
+                override fun onFailure(httpStatus: Int, message: String) {
+                }
+                override fun onError(errorCode: Int, message: String) {
+                    onFailure(errorCode, message)
+                }
+            })
+        }
     }
 }

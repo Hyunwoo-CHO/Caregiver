@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "questions")
 data class Question
     (
-    @PrimaryKey(autoGenerate = true) val uid : Int?,
+    @PrimaryKey(autoGenerate = true) val uid : Int,
     @ColumnInfo(name = "number") var number : Int,
     @ColumnInfo(name = "title") var title : String,
     @ColumnInfo(name = "img", defaultValue = "") var img : String,

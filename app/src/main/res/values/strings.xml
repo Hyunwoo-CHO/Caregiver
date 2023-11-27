@@ -8,6 +8,7 @@
     <string name="menu_pastquestion">모의고사</string>
     <string name="menu_question">문제풀이</string>
     <string name="menu_wrong">오답풀이</string>
+    <string name="menu_test">모의고사</string>
 
     <string name="login">로그인</string>
     <string name="signup">회원가입</string>

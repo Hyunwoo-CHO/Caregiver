@@ -8,7 +8,7 @@ interface MyDao {
     @Insert(entity = User::class)
     fun insertUser(user: User)
 
-    @Query("SELECT * FROM users WHERE id = :id")
+    @Query("SELECT * FROM users WHERE uid = :id")
     fun getUser(id: String): User
 
     /**             Question                **/
@@ -39,6 +39,12 @@ interface MyDao {
     //get questions by category
     @Query("SELECT * FROM questions WHERE cid = :category ORDER BY uid ASC")
     fun getCategoryQuestion(category: String): List<Question>
+
+    @Query("SELECT uid FROM questions WHERE cid = :category ORDER BY number ASC")
+    fun getTestQid(category: String): List<Int>
+
+    @Query("SELECT answer FROM questions WHERE cid = :category ORDER BY number ASC")
+    fun getTestAnswer(category: String): List<Int>
 
     /**             Personal                **/
     @Insert(entity = Personal::class, onConflict = OnConflictStrategy.REPLACE)

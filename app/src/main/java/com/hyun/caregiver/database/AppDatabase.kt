@@ -19,7 +19,7 @@ abstract class AppDatabase : RoomDatabase(){
         }
 
         private fun buildDatabase(context: Context) : AppDatabase {
-            return Room.databaseBuilder(context, AppDatabase::class.java, "caregiver_app_database").build()
+            return Room.databaseBuilder(context, AppDatabase::class.java, "Caregiver_app_database").build()
         }
     }
 }
