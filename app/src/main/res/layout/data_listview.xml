@@ -13,26 +13,37 @@
         android:id="@+id/linearLayout3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:minHeight="70dp"
         android:orientation="horizontal"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
+        <TextView
+            android:id="@+id/data_num"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:padding="5dp"
+            android:textSize="30sp"
+            android:textColor="#000000"
+            android:textStyle="bold"
+            android:fontFamily="@font/base"
+            android:layout_weight="0.1" />
 
         <TextView
             android:id="@+id/data_name"
             android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:paddingStart="15sp"
-            android:textSize="20sp"
+            android:layout_height="match_parent"
+            android:lineSpacingExtra="7sp"
+            android:padding="5dp"
+            android:textSize="30sp"
             android:textColor="#000000"
             android:textStyle="bold"
-            android:fontFamily="@font/line_middle"
-            android:layout_weight="0.9"
-            android:gravity="center_vertical"/>
+            android:fontFamily="@font/base"
+            android:layout_weight="0.8"/>
 
         <androidx.constraintlayout.utils.widget.ImageFilterView
             android:id="@+id/symbol"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
             android:layout_gravity="center_vertical"
             android:layout_weight="0.1"
             android:alpha="0"

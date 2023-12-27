@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:windowFullscreen="false"
+    android:windowIsFloating="false"
+    android:background="@drawable/view_round_white"
+    android:orientation="vertical"
+    android:padding="20dp">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="37dp"
+        android:orientation="horizontal">
+        <androidx.constraintlayout.utils.widget.ImageFilterView
+            android:id="@+id/back"
+            android:layout_width="30dp"
+            android:layout_height="37dp"
+            android:src="@drawable/previous"/>
+        <TextView
+            android:id="@+id/back_text"
+            android:layout_width="wrap_content"
+            android:layout_height="37dp"
+            android:text="뒤로"
+            android:textColor="@color/black"
+            android:textSize="23sp"
+            android:fontFamily="@font/line_bold"
+            android:layout_gravity="start"
+            android:gravity="center" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.constraintlayout.utils.widget.ImageFilterView
+        android:id="@+id/fullscreen_img"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_gravity="center"
+        android:src="@drawable/crown"/>
+
+    <TextView
+        android:id="@+id/text1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="40sp"
+        android:layout_marginTop="30dp"
+        android:text="PRO 버전 업그레이드"
+        android:fontFamily="@font/one_mobile_pop"
+        android:textColor="@color/black"/>
+
+    <TextView
+        android:id="@+id/text2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="40dp"
+        android:gravity="center"
+        android:layout_marginTop="20dp"
+        android:textSize="25sp"
+        android:text="N회차 모의고사\n&amp;\n단원별 문제 풀이\n&amp;\n오답 문제 확인"
+        android:fontFamily="@font/one_mobile_pop"
+        android:textColor="@color/black"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:background="@drawable/full_btn_style"
+        android:id="@+id/yesButton"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:text="프로버전 구매하기"
+        android:fontFamily="@font/line_bold"
+        android:textColor="@color/white"
+        android:textSize="20sp" />
+
+</LinearLayout>

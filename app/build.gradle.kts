@@ -6,15 +6,15 @@ plugins {
 }
 
 android {
-    namespace = "com.hyun.caregiver"
+    namespace = "com.hsilveredu.caregiver"
     compileSdk = 33
 
     defaultConfig {
-        applicationId = "com.hyun.caregiver"
+        applicationId = "com.hsilveredu.caregiver"
         minSdk = 24
         targetSdk = 33
-        versionCode = 1
-        versionName = "1.0"
+        versionCode = 21
+        versionName = "21.0"
         multiDexEnabled = true
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -77,11 +77,15 @@ dependencies {
     /**  coroutines  **/
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9")
     /**  kakao login  **/
-    implementation("com.kakao.sdk:v2-user:2.17.0")
+    implementation("com.kakao.sdk:v2-user:2.18.0")
     /**  naver login  **/
-    implementation("com.navercorp.nid:oauth-jdk8:5.1.0")
+    implementation("com.navercorp.nid:oauth-jdk8:5.9.0")
     /**  firebase login  **/
     implementation("com.google.firebase:firebase-auth-ktx")
     implementation("com.google.firebase:firebase-database-ktx")
     implementation(platform("com.google.firebase:firebase-bom:32.3.1"))
+    /**  google play payment  **/
+    implementation ("com.android.billingclient:billing:6.1.0")
+    /**  subsampling image  **/
+    implementation ("com.github.chrisbanes:PhotoView:2.3.0")
 }

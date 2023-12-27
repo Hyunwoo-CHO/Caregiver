@@ -4,15 +4,17 @@
 
     <string name="menu_home">홈</string>
     <string name="menu_checknote">오답노트</string>
-    <string name="menu_example">예상문제</string>
+    <string name="menu_example">단원별 문제</string>
     <string name="menu_pastquestion">모의고사</string>
     <string name="menu_question">문제풀이</string>
     <string name="menu_wrong">오답풀이</string>
     <string name="menu_test">모의고사</string>
+    <string name="menu_score">성적확인</string>
 
     <string name="login">로그인</string>
     <string name="signup">회원가입</string>
     <string name="logout">로그아웃</string>
+    <string name="upgrade">PRO 버전 구매</string>
 
     <string name="category1">제 1장 요양보호 개론</string>
     <string name="category2">제 2장 요양보호 관련 기초지식</string>

@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/nav_home"
-        android:name="com.hyun.caregiver.fragment.HomeFragment"
+        android:name="com.hsilveredu.caregiver.fragment.HomeFragment"
         android:label="@string/menu_home"
         tools:layout="@layout/fragment_home" >
         <action
@@ -29,7 +29,7 @@
 
     <fragment
         android:id="@+id/nav_checknote"
-        android:name="com.hyun.caregiver.fragment.ChecknoteFragment"
+        android:name="com.hsilveredu.caregiver.fragment.ChecknoteFragment"
         android:label="@string/menu_checknote"
         tools:layout="@layout/fragment_checknote" >
         <action
@@ -56,7 +56,7 @@
 
     <fragment
         android:id="@+id/nav_example"
-        android:name="com.hyun.caregiver.fragment.ExampleFragment"
+        android:name="com.hsilveredu.caregiver.fragment.ExampleFragment"
         android:label="@string/menu_example"
         tools:layout="@layout/fragment_example" >
         <action
@@ -83,7 +83,7 @@
 
     <fragment
         android:id="@+id/nav_pastquestion"
-        android:name="com.hyun.caregiver.fragment.PastQuestionFragment"
+        android:name="com.hsilveredu.caregiver.fragment.PastQuestionFragment"
         android:label="@string/menu_pastquestion"
         tools:layout="@layout/fragment_pastquestion" >
         <action
@@ -110,7 +110,7 @@
 
     <fragment
         android:id="@+id/nav_question"
-        android:name="com.hyun.caregiver.fragment.QuestionFragment"
+        android:name="com.hsilveredu.caregiver.fragment.QuestionFragment"
         android:label="@string/menu_question"
         tools:layout="@layout/fragment_question" >
         <action
@@ -137,7 +137,7 @@
 
     <fragment
         android:id="@+id/nav_wrong"
-        android:name="com.hyun.caregiver.fragment.WrongFragment"
+        android:name="com.hsilveredu.caregiver.fragment.WrongFragment"
         android:label="@string/menu_wrong"
         tools:layout="@layout/fragment_wrong" >
         <action
@@ -164,7 +164,7 @@
 
     <fragment
         android:id="@+id/nav_test"
-        android:name="com.hyun.caregiver.fragment.TestFragment"
+        android:name="com.hsilveredu.caregiver.fragment.TestFragment"
         android:label="@string/menu_test"
         tools:layout="@layout/fragment_test" >
         <action
@@ -179,12 +179,44 @@
             app:destination="@id/nav_example" />
         <action
             android:id="@+id/action_nav_test_to_nav_checknote"
-            app:popUpTo="@id/nav_wrong"
+            app:popUpTo="@id/nav_test"
             app:popUpToInclusive="false"
             app:destination="@id/nav_checknote" />
         <action
             android:id="@+id/action_nav_test_to_nav_pastquestion"
-            app:popUpTo="@id/nav_wrong"
+            app:popUpTo="@id/nav_test"
+            app:popUpToInclusive="false"
+            app:destination="@id/nav_pastquestion" />
+        <action
+            android:id="@+id/action_nav_test_to_nav_score"
+            app:popUpTo="@id/nav_test"
+            app:popUpToInclusive="false"
+            app:destination="@id/nav_score" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_score"
+        android:name="com.hsilveredu.caregiver.fragment.ScoreFragment"
+        android:label="@string/menu_score"
+        tools:layout="@layout/fragment_score" >
+        <action
+            android:id="@+id/action_nav_score_to_nav_home"
+            app:popUpTo="@id/nav_score"
+            app:popUpToInclusive="false"
+            app:destination="@id/nav_home" />
+        <action
+            android:id="@+id/action_nav_score_to_nav_example"
+            app:popUpTo="@id/nav_score"
+            app:popUpToInclusive="false"
+            app:destination="@id/nav_example" />
+        <action
+            android:id="@+id/action_nav_score_to_nav_checknote"
+            app:popUpTo="@id/nav_score"
+            app:popUpToInclusive="false"
+            app:destination="@id/nav_checknote" />
+        <action
+            android:id="@+id/action_nav_score_to_nav_pastquestion"
+            app:popUpTo="@id/nav_score"
             app:popUpToInclusive="false"
             app:destination="@id/nav_pastquestion" />
     </fragment>
