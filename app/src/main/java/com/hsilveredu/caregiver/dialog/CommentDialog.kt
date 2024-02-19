@@ -3,11 +3,13 @@ package com.hsilveredu.caregiver.dialog
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import com.bumptech.glide.Glide
+import com.hsilveredu.caregiver.R
 import com.hsilveredu.caregiver.databinding.DialogCommentBinding
 
 class CommentDialog( comment: String, comment_img: String ) : DialogFragment() {
@@ -37,7 +39,7 @@ class CommentDialog( comment: String, comment_img: String ) : DialogFragment() {
         binding.comment.text = comment
         if (!comment_img.equals("")) {
             Glide.with(this).load(comment_img).into(binding.commentImg)
-            binding.commentImg.layoutParams.height = 500
+            binding.commentImg.layoutParams.height = 300
         } else {
             binding.commentImg.layoutParams.height = 0
         }
@@ -49,6 +51,10 @@ class CommentDialog( comment: String, comment_img: String ) : DialogFragment() {
 
         return view
     }
+
+//    override fun getTheme(): Int {
+//        return R.style.DialogTheme
+//    }
 
     override fun onDestroyView() {
         super.onDestroyView()

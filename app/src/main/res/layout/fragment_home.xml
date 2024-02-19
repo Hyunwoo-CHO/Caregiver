@@ -121,7 +121,7 @@
                     android:layout_weight="0.2"
                     android:textAlignment="center"
                     android:fontFamily="@font/one_mobile_pop"
-                    android:textSize="30sp"
+                    android:textSize="27sp"
                     android:textColor="@color/black"
                     android:text="@string/menu_pastquestion"/>
             </androidx.appcompat.widget.LinearLayoutCompat>
@@ -155,7 +155,7 @@
                     android:layout_weight="0.2"
                     android:textAlignment="center"
                     android:fontFamily="@font/one_mobile_pop"
-                    android:textSize="30sp"
+                    android:textSize="27sp"
                     android:text="@string/menu_example"
                     android:textColor="@color/black" />
             </androidx.appcompat.widget.LinearLayoutCompat>
@@ -189,7 +189,7 @@
                     android:layout_weight="0.2"
                     android:textAlignment="center"
                     android:fontFamily="@font/one_mobile_pop"
-                    android:textSize="30sp"
+                    android:textSize="27sp"
                     android:textColor="@color/black"
                     android:text="@string/menu_checknote"/>
             </androidx.appcompat.widget.LinearLayoutCompat>

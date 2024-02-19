@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
@@ -34,6 +35,14 @@ class ScoreFragment() : Fragment() {
 
         _binding = FragmentScoreBinding.inflate(inflater, container, false)
         val view = binding.root
+
+        (activity as MainActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(false)
+
+        (activity as MainActivity).onBackPressedDispatcher.addCallback(object: OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                (activity as MainActivity).findNavController(R.id.nav_host_fragment_content_main).navigate(R.id.action_nav_score_to_nav_home)
+            }
+        })
 
         var correct_writ = 0
         var correct_prac = 0

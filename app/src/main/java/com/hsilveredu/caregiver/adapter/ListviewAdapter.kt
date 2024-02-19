@@ -12,24 +12,17 @@ import com.hsilveredu.caregiver.R
 class ListviewAdapter (val context: Context, val data_list: ArrayList<String>) : BaseAdapter(){
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         /* LayoutInflater는 item을 Adapter에서 사용할 View로 부풀려주는(inflate) 역할을 한다. */
-        val view : View
-        val holder : CustomViewHolder
-        if (convertView == null) {
-            view = LayoutInflater.from(context).inflate(R.layout.data_listview, null)
-            holder = CustomViewHolder()
-            holder.image = view.findViewById(R.id.symbol)
-            holder.dataname = view.findViewById(R.id.data_name)
-            holder.datanum = view.findViewById(R.id.data_num)
+        val view: View = LayoutInflater.from(context).inflate(R.layout.data_listview, null)
 
-            view.tag = holder
-        } else {
-            holder = convertView.tag as CustomViewHolder
-            view = convertView
-        }
+        val image = view.findViewById<ImageFilterView>(R.id.symbol)
+        val dataname = view.findViewById<TextView>(R.id.data_name)
+        val datanum = view.findViewById<TextView>(R.id.data_num)
 
         val data = data_list[position]
-        holder.dataname?.text = data
-        holder.datanum?.text = (position + 1).toString() + "."
+        dataname?.text = data
+        datanum?.text = (position + 1).toString() + "."
+
+        view.tag = position.toString()
 
 
         return view
@@ -46,10 +39,4 @@ class ListviewAdapter (val context: Context, val data_list: ArrayList<String>) :
     override fun getCount(): Int {
         return data_list.size
     }
-}
-
-class CustomViewHolder {
-    var image: ImageFilterView? = null
-    var dataname: TextView? = null
-    var datanum: TextView? = null
 }

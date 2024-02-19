@@ -13,8 +13,8 @@ android {
         applicationId = "com.hsilveredu.caregiver"
         minSdk = 24
         targetSdk = 33
-        versionCode = 21
-        versionName = "21.0"
+        versionCode = 28
+        versionName = "28.0"
         multiDexEnabled = true
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -67,7 +67,7 @@ dependencies {
     implementation("com.squareup.okhttp3:logging-interceptor:4.3.1")
     /**  Glide library  **/
     implementation("com.github.bumptech.glide:glide:4.16.0")
-    annotationProcessor("com.github.bumptech.glide:compiler:4.9.0")
+    kapt("com.github.bumptech.glide:compiler:4.9.0")
     /**  Google Oauth client  **/
     implementation("com.google.api-client:google-api-client:1.30.4")
     implementation("com.google.oauth-client:google-oauth-client-jetty:1.30.6")
@@ -88,4 +88,6 @@ dependencies {
     implementation ("com.android.billingclient:billing:6.1.0")
     /**  subsampling image  **/
     implementation ("com.github.chrisbanes:PhotoView:2.3.0")
+    /**  recaptcha  **/
+    implementation ("com.google.android.recaptcha:recaptcha:18.4.0")
 }

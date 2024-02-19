@@ -224,7 +224,6 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         viewModelScope.launch {
             try {
                 _test_my_answer_list.set(number - 1, answer)
-                Log.d("value", _test_my_answer_list[number - 1].toString())
             } catch (e: Exception) {
                 Log.d("Try-Catch testAnswer", e.toString())
             }

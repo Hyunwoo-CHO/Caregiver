@@ -22,11 +22,11 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:padding="5dp"
-            android:textSize="30sp"
+            android:textSize="27sp"
             android:textColor="#000000"
             android:textStyle="bold"
             android:fontFamily="@font/base"
-            android:layout_weight="0.1" />
+            android:layout_weight="0.15" />
 
         <TextView
             android:id="@+id/data_name"
@@ -34,11 +34,11 @@
             android:layout_height="match_parent"
             android:lineSpacingExtra="7sp"
             android:padding="5dp"
-            android:textSize="30sp"
+            android:textSize="27sp"
             android:textColor="#000000"
             android:textStyle="bold"
             android:fontFamily="@font/base"
-            android:layout_weight="0.8"/>
+            android:layout_weight="0.75"/>
 
         <androidx.constraintlayout.utils.widget.ImageFilterView
             android:id="@+id/symbol"

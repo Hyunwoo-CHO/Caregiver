@@ -8,8 +8,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.TableLayout
+import android.widget.TableRow
 import android.widget.TextView
 import androidx.activity.OnBackPressedCallback
+import androidx.core.view.children
+import androidx.core.view.forEachIndexed
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
@@ -108,9 +112,11 @@ class TestFragment : Fragment() {
 
         TestViewModel.quest.observe(viewLifecycleOwner) {
             it.getContentIfNotHandled()?.let {
+                // Clear all selections
+                clearAllSelections(binding.questionMenu)
                 val layout_manager = binding.itemRecycler.layoutManager!!
                 layout_manager.scrollToPosition(it.number - 1)
-                textView.text = it.number.toString() + ". " + it.title
+                textView.text = (it.number.toString() + ". " + it.title).replace(" ", "\u00A0")
                 imgURL = it.img
                 if (it.img != "") {
                     Glide.with((activity as MainActivity)).load(it.img).into(imgView)
@@ -120,24 +126,28 @@ class TestFragment : Fragment() {
                     imgView.layoutParams.height = 0
                 }
                 number = it.number
-                val data_list = ArrayList<String>()
-                val elementToAdd = listOf(it.opt_a, it.opt_b, it.opt_c, it.opt_d, it.opt_e)
-                data_list.addAll(elementToAdd)
-                dataAdapter = ListviewAdapter((activity as MainActivity), data_list)
-                binding.questionMenu.adapter = dataAdapter
+                binding.dataName1.text = it.opt_a
+                binding.dataName2.text = it.opt_b
+                binding.dataName3.text = it.opt_c
+                binding.dataName4.text = it.opt_d
+                binding.dataName5.text = it.opt_e
                 TestViewModel.getTestAnswer(number)
             }
         }
 
         //check the answer by touching event of listview adapter
-        binding.questionMenu.setOnItemClickListener { dataAdapter, view, position, id ->
-            for (i in 0..4) {
-                val initList = binding.questionMenu.getChildAt(i)
-                initList.setBackgroundResource(R.drawable.listview_unclicked)
+        binding.questionMenu.children.forEachIndexed { index: Int, view: View ->
+            if (view is TableRow) {
+                view.setOnClickListener {
+                    // Clear all selections
+                    clearAllSelections(binding.questionMenu)
+
+                    // Get the row number
+                    val selectedRowNumber = index + 1
+                    TestViewModel.testAnswer(number, selectedRowNumber)
+                    view.setBackgroundResource(R.drawable.listview_selected)
+                }
             }
-            TestViewModel.testAnswer(number, position + 1)
-            val selected = binding.questionMenu.getChildAt(position)
-            selected.setBackgroundResource(R.drawable.listview_selected)
         }
 
         // for remember the answer
@@ -147,14 +157,6 @@ class TestFragment : Fragment() {
                 selected.setBackgroundResource(R.drawable.listview_selected)
             }
         }
-        //click image to enlargement
-//        binding.img.setOnClickListener {
-//            if (imgURL != "") {
-//                val intent = Intent((activity as MainActivity), ImageActivity::class.java)
-//                intent.putExtra("value", imgURL)
-//                startActivity(intent)
-//            }
-//        }
 
         binding.previousQuestion.setOnClickListener {
             TestViewModel.previousQuestion()
@@ -185,5 +187,13 @@ class TestFragment : Fragment() {
         super.onDestroyView()
         _binding = null
         countDownTimer.cancel()
+    }
+
+    private fun clearAllSelections(tableLayout: TableLayout) {
+        tableLayout.children.forEach { view ->
+            if (view is TableRow) {
+                view.setBackgroundResource(R.drawable.listview_unclicked)
+            }
+        }
     }
 }

@@ -13,25 +13,21 @@
         android:layout_height="50dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:fillViewport="true"
-        app:layout_constraintTop_toBottomOf="@id/item_recycler"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent">
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/image_card"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:background="@drawable/custom_edittext"
             android:layout_marginTop="10dp"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
             android:layout_marginBottom="20dp"
             app:cardCornerRadius="30dp"
-            app:cardElevation="20dp">
+            app:cardElevation="20dp"
+            app:layout_constraintTop_toBottomOf="@id/item_recycler"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
@@ -145,15 +141,155 @@
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/question"/>
 
-                <ListView
-                    android:id="@+id/question_menu"
+                <ScrollView
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="20dp"
                     app:layout_constraintTop_toBottomOf="@id/img"
                     app:layout_constraintBottom_toTopOf="@id/guideline4"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent" />
+                    >
+                    <TableLayout
+                        android:id="@+id/question_menu"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_marginTop="15dp">
+                        <TableRow android:minHeight="70dp">
+                            <TextView
+                                android:id="@+id/data_num1"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:padding="5dp"
+                                android:textSize="27sp"
+                                android:textColor="#000000"
+                                android:textStyle="bold"
+                                android:text="1."
+                                android:layout_marginBottom="5dp"
+                                android:fontFamily="@font/base"
+                                android:layout_weight="0.15" />
+
+                            <TextView
+                                android:id="@+id/data_name1"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:lineSpacingExtra="7sp"
+                                android:padding="5dp"
+                                android:textSize="27sp"
+                                android:textColor="#000000"
+                                android:textStyle="bold"
+                                android:layout_marginBottom="5dp"
+                                android:fontFamily="@font/base"
+                                android:layout_weight="0.7"/>
+                        </TableRow>
+                        <TableRow android:minHeight="70dp">
+                            <TextView
+                                android:id="@+id/data_num2"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:padding="5dp"
+                                android:textSize="27sp"
+                                android:textColor="#000000"
+                                android:textStyle="bold"
+                                android:text="2."
+                                android:layout_marginBottom="5dp"
+                                android:fontFamily="@font/base"
+                                android:layout_weight="0.15" />
+
+                            <TextView
+                                android:id="@+id/data_name2"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:lineSpacingExtra="7sp"
+                                android:padding="5dp"
+                                android:textSize="27sp"
+                                android:textColor="#000000"
+                                android:textStyle="bold"
+                                android:layout_marginBottom="5dp"
+                                android:fontFamily="@font/base"
+                                android:layout_weight="0.7"/>
+                        </TableRow>
+                        <TableRow android:minHeight="70dp">
+                            <TextView
+                                android:id="@+id/data_num3"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:padding="5dp"
+                                android:textSize="27sp"
+                                android:textColor="#000000"
+                                android:textStyle="bold"
+                                android:text="3."
+                                android:layout_marginBottom="5dp"
+                                android:fontFamily="@font/base"
+                                android:layout_weight="0.15" />
+
+                            <TextView
+                                android:id="@+id/data_name3"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:lineSpacingExtra="7sp"
+                                android:padding="5dp"
+                                android:textSize="27sp"
+                                android:textColor="#000000"
+                                android:textStyle="bold"
+                                android:layout_marginBottom="5dp"
+                                android:fontFamily="@font/base"
+                                android:layout_weight="0.7"/>
+                        </TableRow>
+                        <TableRow android:minHeight="70dp">
+                            <TextView
+                                android:id="@+id/data_num4"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:padding="5dp"
+                                android:textSize="27sp"
+                                android:textColor="#000000"
+                                android:textStyle="bold"
+                                android:text="4."
+                                android:layout_marginBottom="5dp"
+                                android:fontFamily="@font/base"
+                                android:layout_weight="0.15" />
+
+                            <TextView
+                                android:id="@+id/data_name4"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:lineSpacingExtra="7sp"
+                                android:padding="5dp"
+                                android:textSize="27sp"
+                                android:textColor="#000000"
+                                android:textStyle="bold"
+                                android:layout_marginBottom="5dp"
+                                android:fontFamily="@font/base"
+                                android:layout_weight="0.7"/>
+                        </TableRow>
+                        <TableRow android:minHeight="70dp">
+                            <TextView
+                                android:id="@+id/data_num5"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:padding="5dp"
+                                android:textSize="27sp"
+                                android:textColor="#000000"
+                                android:textStyle="bold"
+                                android:text="5."
+                                android:layout_marginBottom="5dp"
+                                android:fontFamily="@font/base"
+                                android:layout_weight="0.15" />
+
+                            <TextView
+                                android:id="@+id/data_name5"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:lineSpacingExtra="7sp"
+                                android:padding="5dp"
+                                android:textSize="27sp"
+                                android:textColor="#000000"
+                                android:textStyle="bold"
+                                android:layout_marginBottom="5dp"
+                                android:fontFamily="@font/base"
+                                android:layout_weight="0.7"/>
+                        </TableRow>
+                    </TableLayout>
+                </ScrollView>
 
                 <androidx.constraintlayout.utils.widget.ImageFilterView
                     android:id="@+id/previous_question"
@@ -189,5 +325,4 @@
                     app:layout_constraintEnd_toStartOf="@id/guideline7"/>
             </androidx.constraintlayout.widget.ConstraintLayout>
         </com.google.android.material.card.MaterialCardView>
-    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,9 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.TableLayout
+import android.widget.TableRow
 import android.widget.TextView
 import androidx.activity.OnBackPressedCallback
 import androidx.constraintlayout.utils.widget.ImageFilterView
+import androidx.core.view.children
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
@@ -80,9 +83,11 @@ class WrongFragment : Fragment() {
         wrongViewModel.quest.observe(viewLifecycleOwner) {
             it.getContentIfNotHandled()?.let {
                 solved = it.solved
+                // Clear all selections
+                clearAllSelections(binding.questionMenu)
                 val layout_manager = binding.itemRecycler.layoutManager!!
                 layout_manager.scrollToPosition(it.number - 1)
-                textView.text = it.number.toString() + ". " + it.title
+                textView.text = (it.number.toString() + ". " + it.title).replace(" ", "\u00A0")
                 if (it.img != "") {
                     Glide.with((activity as MainActivity)).load(it.img).into(imgView)
                     imgView.layoutParams.height = 300
@@ -94,43 +99,35 @@ class WrongFragment : Fragment() {
                 answer = it.answer
                 comment = it.comment
                 comment_img = it.comment_img
-                val data_list = ArrayList<String>()
-                val elementToAdd = listOf(it.opt_a, it.opt_b, it.opt_c, it.opt_d, it.opt_e)
-                data_list.addAll(elementToAdd)
-                dataAdapter = ListviewAdapter((activity as MainActivity), data_list)
-                binding.questionMenu.adapter = dataAdapter
+                binding.dataName1.text = it.opt_a
+                binding.dataName2.text = it.opt_b
+                binding.dataName3.text = it.opt_c
+                binding.dataName4.text = it.opt_d
+                binding.dataName5.text = it.opt_e
                 if (solved) {
                     wrongViewModel.getPersonal(qid)
                 }
             }
         }
 
-        //check the answer by touching event of listview adapter
-        binding.questionMenu.setOnItemClickListener { dataAdapter, view, position, id ->
-            for (i in 0..4) {
-                val initList = binding.questionMenu.getChildAt(i)
-                initList.setBackgroundResource(R.drawable.listview_unclicked)
-                initList.findViewById<ImageFilterView>(R.id.symbol).alpha = 0.0f
-            }
-            if (answer == position + 1) {
-                wrongViewModel.insertAnswer(qid, answer, position + 1, true)
-                val selected = binding.questionMenu.getChildAt(position)
-                selected.setBackgroundResource(R.drawable.listview_clicked)
-                selected.findViewById<ImageFilterView>(R.id.symbol).alpha = 1.0f
-//                 add listview color update and comment
-            }
-            else {
-                wrongViewModel.insertAnswer(qid, answer, position + 1, false)
-                // add listview color update and comment
-                val selected = binding.questionMenu.getChildAt(position)
-                val answer_item = binding.questionMenu.getChildAt(answer - 1)
-                val image = selected.findViewById<ImageFilterView>(R.id.symbol)
-                val answer_image = answer_item.findViewById<ImageFilterView>(R.id.symbol)
-                selected.setBackgroundResource(R.drawable.listview_wrong)
-                image.setImageResource(R.drawable.red_check)
-                image.alpha = 1.0f
-                answer_item.setBackgroundResource(R.drawable.listview_clicked)
-                answer_image.alpha = 1.0f
+        binding.questionMenu.children.forEachIndexed { index, view ->
+            if (view is TableRow) {
+                view.setOnClickListener {
+                    // Clear all selections
+                    clearAllSelections(binding.questionMenu)
+
+                    // Get the row number
+                    val selectedRowNumber = index + 1
+                    if (answer == selectedRowNumber) {
+                        wrongViewModel.insertAnswer(qid, answer, selectedRowNumber, true)
+                        view.setBackgroundResource(R.drawable.listview_clicked)
+                    } else {
+                        wrongViewModel.insertAnswer(qid, answer, selectedRowNumber, false)
+                        val answer_view = binding.questionMenu.getChildAt(answer-1)
+                        view.setBackgroundResource(R.drawable.listview_wrong)
+                        answer_view.setBackgroundResource(R.drawable.listview_clicked)
+                    }
+                }
             }
         }
 
@@ -138,18 +135,12 @@ class WrongFragment : Fragment() {
         wrongViewModel.personal.observe(viewLifecycleOwner) {
             it.getContentIfNotHandled()?.let{
                 val selected = binding.questionMenu.getChildAt(it.m_answer - 1)
-                val image = selected.findViewById<ImageFilterView>(R.id.symbol)
                 if (it.correction) {
                     selected.setBackgroundResource(R.drawable.listview_clicked)
-                    image.alpha = 1.0f
                 } else {
                     val answer_item = binding.questionMenu.getChildAt(answer - 1)
-                    val answer_image = answer_item.findViewById<ImageFilterView>(R.id.symbol)
                     selected.setBackgroundResource(R.drawable.listview_wrong)
-                    image.setImageResource(R.drawable.red_check)
-                    image.alpha = 1.0f
                     answer_item.setBackgroundResource(R.drawable.listview_clicked)
-                    answer_image.alpha = 1.0f
                 }
             }
         }
@@ -175,5 +166,13 @@ class WrongFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun clearAllSelections(tableLayout: TableLayout) {
+        tableLayout.children.forEach { view ->
+            if (view is TableRow) {
+                view.setBackgroundResource(R.drawable.listview_unclicked)
+            }
+        }
     }
 }

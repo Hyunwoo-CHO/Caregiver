@@ -9,10 +9,11 @@
     android:orientation="vertical"
     android:padding="20dp">
 
-    <androidx.constraintlayout.utils.widget.ImageFilterView
+    <com.github.chrisbanes.photoview.PhotoView
         android:id="@+id/comment_img"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:scaleType="fitXY"
         android:layout_gravity="center" />
 
     <TextView
